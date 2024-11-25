@@ -3,6 +3,7 @@ package com.oocl.springbootemployee.controller;
 
 import com.oocl.springbootemployee.entity.Company;
 import com.oocl.springbootemployee.entity.Employee;
+import com.oocl.springbootemployee.page.CompanyPage;
 import com.oocl.springbootemployee.repository.CompanyRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class CompanyController {
     }
 
     @GetMapping(params = {"page", "size"})
-    public List<Company> getCompaniesByPage(@RequestParam Integer page, @RequestParam Integer size) {
+    public CompanyPage getCompaniesByPage(@RequestParam Integer page, @RequestParam Integer size) {
         return null;
     }
 

@@ -50,10 +50,10 @@ public class CompanyControllerTest {
         String companyJson = client.perform(MockMvcRequestBuilders.get("/companies"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        List<Company> employees = listJson.parseObject(companyJson);
+        List<Company> companies = listJson.parseObject(companyJson);
 
         // Then
-        assertThat(employees).isEqualTo(givenCompanies);
+        assertThat(companies).isEqualTo(givenCompanies);
     }
 
 
