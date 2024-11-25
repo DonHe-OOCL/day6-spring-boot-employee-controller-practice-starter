@@ -2,7 +2,7 @@ package com.oocl.springbootemployee.repository;
 
 import com.oocl.springbootemployee.entity.Employee;
 import com.oocl.springbootemployee.entity.Gender;
-import com.oocl.springbootemployee.vo.EmployeePage;
+import com.oocl.springbootemployee.page.EmployeePage;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
