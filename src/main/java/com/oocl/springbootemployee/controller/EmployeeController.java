@@ -4,6 +4,7 @@ import com.oocl.springbootemployee.entity.Employee;
 import com.oocl.springbootemployee.entity.Gender;
 import com.oocl.springbootemployee.repository.EmployeeRepository;
 
+import com.oocl.springbootemployee.vo.EmployeePage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,7 @@ public class EmployeeController {
     }
 
     @GetMapping(params = {"page", "size"})
-    public List<Employee> updateById(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public EmployeePage getEmployeesPage(@RequestParam("page") int page, @RequestParam("size") int size) {
         return employeeRepository.getPage(page, size);
     }
 

@@ -2,7 +2,6 @@ package com.oocl.springbootemployee.controller;
 
 
 import com.oocl.springbootemployee.entity.Company;
-import com.oocl.springbootemployee.entity.CompanyResponse;
 import com.oocl.springbootemployee.entity.Employee;
 import com.oocl.springbootemployee.repository.CompanyRepository;
 import org.springframework.http.HttpStatus;
@@ -26,7 +25,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public CompanyResponse getCompanyById(@PathVariable Long id) {
+    public Company getCompanyById(@PathVariable Long id) {
         return null;
     }
 

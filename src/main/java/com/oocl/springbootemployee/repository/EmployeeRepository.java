@@ -2,6 +2,7 @@ package com.oocl.springbootemployee.repository;
 
 import com.oocl.springbootemployee.entity.Employee;
 import com.oocl.springbootemployee.entity.Gender;
+import com.oocl.springbootemployee.vo.EmployeePage;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -52,9 +53,10 @@ public class EmployeeRepository {
         return updateEmployee;
     }
 
-    public List<Employee> getPage(int page, int size) {
-        return getAll().stream()
+    public EmployeePage getPage(int page, int size) {
+        List<Employee> employeesPage = getAll().stream()
                 .skip((page - 1L) * size).limit(size)
                 .toList();
+        return new EmployeePage(page, size, employeesPage);
     }
 }

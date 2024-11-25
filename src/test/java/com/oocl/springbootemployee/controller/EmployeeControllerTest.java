@@ -182,12 +182,14 @@ public class EmployeeControllerTest {
         // When & Then
         client.perform(MockMvcRequestBuilders.get("/employees").param("page", String.valueOf(page)).param("size", String.valueOf(size)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(5)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].id").value(2L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[2].id").value(3L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[3].id").value(4L))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[4].id").value(5L));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.page").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size").value(5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees", hasSize(5)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].id").value(1L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[1].id").value(2L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[2].id").value(3L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[3].id").value(4L))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[4].id").value(5L));
     }
 
 }
