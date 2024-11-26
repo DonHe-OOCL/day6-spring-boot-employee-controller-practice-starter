@@ -5,8 +5,6 @@ import com.oocl.springbootemployee.entity.Gender;
 import com.oocl.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,9 +30,9 @@ public class EmployeeControllerTest {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
-    public JacksonTester<Employee> json;
+    public JacksonTester<Employee> employeeJacksonTester;
     @Autowired
-    private JacksonTester<List<Employee>> listJson;
+    private JacksonTester<List<Employee>> listJacksonTester;
 
     @BeforeEach
     void setUp() {
@@ -56,7 +54,7 @@ public class EmployeeControllerTest {
         String employeeJson = client.perform(MockMvcRequestBuilders.get("/employees"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        List<Employee> employees = listJson.parseObject(employeeJson);
+        List<Employee> employees = listJacksonTester.parseObject(employeeJson);
 
         // Then
         assertThat(employees).isEqualTo(givenEmployees);
@@ -72,7 +70,7 @@ public class EmployeeControllerTest {
         String employeeJson = client.perform(MockMvcRequestBuilders.get("/employees/" + employee.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        Employee returnedEmployee = json.parseObject(employeeJson);
+        Employee returnedEmployee = employeeJacksonTester.parseObject(employeeJson);
 
         // Then
         assertThat(returnedEmployee).isEqualTo(employee);
@@ -101,7 +99,7 @@ public class EmployeeControllerTest {
         String employeeJson = client.perform(MockMvcRequestBuilders.get("/employees").param("gender", "MALE"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        List<Employee> employees = listJson.parseObject(employeeJson);
+        List<Employee> employees = listJacksonTester.parseObject(employeeJson);
 
         // Then
         assertThat(employees).isEqualTo(givenEmployees);
@@ -118,7 +116,7 @@ public class EmployeeControllerTest {
                 "    \"salary\": 900000.0\n" +
                 "}";
 
-        Employee expectEmployee = json.parseObject(content);
+        Employee expectEmployee = employeeJacksonTester.parseObject(content);
 
         // When & Then
         client.perform(MockMvcRequestBuilders.post("/employees")
